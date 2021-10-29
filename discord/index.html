@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Accessible Discord Color Generator</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app" class="grid">
+    <div class="config">
+        <div class="config__inner">
+            <div class="input">
+                <label>Colors:</label>
+                <input type="number" v-model="color_count" max="20" min="0">
+            </div>
+
+            <div class="input">
+                <label>Shades:</label>
+                <input type="number" v-model="shade_count" max="3" min="1">
+            </div>
+
+            <div class="input">
+                <label>Luminosities:</label>
+                <input type="number" v-model="lum_count" max="3" min="1">
+            </div>
+
+            <div class="input">
+                <label>Grays:</label>
+                <input type="number" v-model="gray_count" max="3" min="0">
+            </div>
+
+            <div class="input">
+                <label>Contrast (light):</label>
+                <input type="number" v-model="light_contrast" step="0.1" max="5" min="1.5">
+            </div>
+
+            <div class="input">
+                <label>Contrast (dark):</label>
+                <input type="number" v-model="dark_contrast" step="0.1" max="5" min="2">
+            </div>
+        </div>
+    </div>
+    <div class="light" :style="{ background: light }">
+        <message v-for="(color, i) in colors" :color="color" :key="i + '_light'"/>
+    </div>
+    <div class="dark" :style="{ background: dark }">
+        <message v-for="(color, i) in colors" :color="color" :key="i + '_dark'"/>
+    </div>
+</div>
+
+<script type="text/x-template" id="message-template">
+    <div class="message">
+        <p class="message--name" :style="{ color }">Name goes here | {{ color }}</p>
+        <p class="message--text">This is some message. Look, pretty!</p>
+    </div>
+</script>
+
+<script type="text/javascript" src="index.js"></script>
+</body>
+</html>
